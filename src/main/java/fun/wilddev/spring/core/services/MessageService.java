@@ -2,8 +2,6 @@ package fun.wilddev.spring.core.services;
 
 import java.util.Locale;
 
-import lombok.AllArgsConstructor;
-
 import org.springframework.context.MessageSource;
 import org.springframework.lang.NonNull;
 import org.springframework.stereotype.Service;
@@ -11,13 +9,24 @@ import org.springframework.stereotype.Service;
 /**
  * Customized version of {@link org.springframework.context.MessageSource}
  */
-@AllArgsConstructor
 @Service
 public class MessageService {
 
     private final static String DEFAULT_MESSAGE = "Unknown message code";
 
+    /**
+     * {@link MessageSource} bean reference
+     */
     private final MessageSource messageSource;
+
+    /**
+     * Instantiates the class by {@link MessageSource}
+     *
+     * @param messageSource - {@link MessageSource} bean
+     */
+    public MessageService(MessageSource messageSource) {
+        this.messageSource = messageSource;
+    }
 
     /**
      * Delegates a call to {@link MessageSource#getMessage(String, Object[], String, Locale)}

@@ -10,16 +10,48 @@ import org.springframework.lang.NonNull;
 
 import lombok.*;
 
-@AllArgsConstructor
+/**
+ * An abstraction for datetime offset calculator implementations
+ */
 public abstract class AbstractDateCalculator implements DateCalculator {
 
+    /**
+     * Logger reference
+     */
     protected final Logger log;
 
+    /**
+     * {@link DurationReader} bean reference
+     */
     protected final DurationReader durationReader;
 
+    /**
+     * Mapping function for "seconds"
+     */
     protected final BiFunction<LocalDateTime, Integer, LocalDateTime> secondsFunc;
 
+    /**
+     * Mapping function for "minutes"
+     */
     protected final BiFunction<LocalDateTime, Integer, LocalDateTime> minutesFunc;
+
+    /**
+     * Instantiates the class by composite params set
+     *
+     * @param log - logger reference
+     * @param durationReader - {@link DurationReader} bean
+     * @param secondsFunc - mapping function for "seconds"
+     * @param minutesFunc - mapping function for "minutes"
+     */
+    protected AbstractDateCalculator(Logger log, DurationReader durationReader,
+                                     BiFunction<LocalDateTime, Integer, LocalDateTime> secondsFunc,
+                                     BiFunction<LocalDateTime, Integer, LocalDateTime> minutesFunc) {
+
+        this.log = log;
+        this.durationReader = durationReader;
+        this.secondsFunc = secondsFunc;
+        this.minutesFunc = minutesFunc;
+    }
 
     @Override
     public LocalDateTime calc(@NonNull LocalDateTime basis, @NonNull String str) {

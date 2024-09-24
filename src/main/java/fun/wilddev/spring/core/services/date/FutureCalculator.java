@@ -12,6 +12,11 @@ import org.springframework.stereotype.Service;
 @Service
 public class FutureCalculator extends AbstractDateCalculator {
 
+    /**
+     * Instantiates the class by {@link DurationReader}
+     *
+     * @param durationReader - {@link DurationReader} bean
+     */
     public FutureCalculator(DurationReader durationReader) {
         super(log, durationReader, LocalDateTime::plusSeconds, LocalDateTime::plusMinutes);
     }
