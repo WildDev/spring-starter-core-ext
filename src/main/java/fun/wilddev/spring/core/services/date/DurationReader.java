@@ -23,6 +23,13 @@ public class DurationReader {
 
     private final static Pattern PATTERN = Pattern.compile("^([0-9]+)([a-z]+)$");
 
+    /**
+     * Default constructor
+     */
+    public DurationReader() {
+
+    }
+
     private Integer parseValue(Matcher matcher) {
         return Integer.parseInt(matcher.group(VALUE_GROUP_ID));
     }
