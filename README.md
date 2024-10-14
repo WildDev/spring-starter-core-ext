@@ -10,6 +10,8 @@ Core extension starter for [Spring](https://spring.io) apps.
 For example, `futureCalculator.calc(LocalDateTime.now(), "20s")` is equal to `LocalDateTime.now().plusSeconds(20)`
 * `MessageService` - is a customized version of Spring's `MessageSource` with fewer parameters
 * `ExpiredRecordsCollector` - an accumulative interface for expired data collection
+* `Queue`, `Slicer`, `Task` - interfaces to implement custom queues, slicers and tasks respectively
+* `PublishingPoller` - polling based abstraction to process large datasets
 
 ### Get started
 
@@ -22,6 +24,6 @@ Also available in Maven central:
 <dependency>
     <groupId>fun.wilddev.lib</groupId>
     <artifactId>spring-starter-core-ext</artifactId>
-    <version>1.0.0.RELEASE</version>
+    <version>1.0.1.RELEASE</version>
 </dependency>
 ```
