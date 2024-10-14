@@ -1,7 +1,7 @@
 package fun.wilddev.spring.core.interfaces;
 
 @FunctionalInterface
-public interface PollerCallback {
+public interface PublishingPollerCallback {
 
     void onComplete(int processed, int total);
 }
