@@ -8,11 +8,11 @@ import org.slf4j.Logger;
 import fun.wilddev.spring.core.interfaces.*;
 
 @AllArgsConstructor
-public abstract class Poller<T> {
+public abstract class PublishingPoller<T> {
 
     protected final Logger log;
 
-    protected final Integer pollSize;
+    protected final Integer size;
 
     protected final Slicer<T> slicer;
 
@@ -20,11 +20,11 @@ public abstract class Poller<T> {
 
     protected final Task<T> preprocessingTask;
 
-    protected final PollerCallback callback;
+    protected final PublishingPollerCallback callback;
 
     public void poll() {
 
-        List<T> items = slicer.sliceNew(pollSize);
+        List<T> items = slicer.slice(size);
 
         if (items.isEmpty()) {
 

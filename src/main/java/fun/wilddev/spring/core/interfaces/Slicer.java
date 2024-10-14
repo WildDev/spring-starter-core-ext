@@ -4,5 +4,5 @@ import java.util.List;
 
 public interface Slicer<T> {
 
-    List<T> sliceNew(int size);
+    List<T> slice(int size);
 }
