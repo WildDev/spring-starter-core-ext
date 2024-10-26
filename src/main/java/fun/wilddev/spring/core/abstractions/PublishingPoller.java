@@ -1,6 +1,7 @@
 package fun.wilddev.spring.core.abstractions;
 
 import java.util.List;
+import java.util.function.Predicate;
 
 import org.slf4j.Logger;
 
@@ -34,10 +35,21 @@ public abstract class PublishingPoller<T> {
     protected final Queue<T> queue;
 
     /**
+     * Filter to control how items are queued
+     */
+    protected final Predicate<T> filter;
+
+    /**
      * Preprocessing task to be triggered before each item
      * is published to the target queue. Is optional and may be null.
      */
     protected final Task<T> preprocessingTask;
+
+    /**
+     * Postprocessing task to be triggered after each item
+     * is published to the target queue. Is optional and may be null.
+     */
+    protected final Task<T> postprocessingTask;
 
     /**
      * Callback to be executed as the poller execution
@@ -52,18 +64,23 @@ public abstract class PublishingPoller<T> {
      * @param size - chunk size to slice
      * @param slicer - {@link Slicer} instance
      * @param queue - target queue where sliced items are moved
+     * @param filter - filter to control how items are queued
      * @param preprocessingTask - preprocessing task (optional)
+     * @param postprocessingTask - postprocessing task (optional)
      * @param callback - callback (optional)
      */
     protected PublishingPoller(Logger log, Integer size, Slicer<T> slicer,
-                               Queue<T> queue, Task<T> preprocessingTask,
+                               Queue<T> queue, Predicate<T> filter,
+                               Task<T> preprocessingTask, Task<T> postprocessingTask,
                                PublishingPollerCallback callback) {
 
         this.log = log;
         this.size = size;
         this.slicer = slicer;
         this.queue = queue;
+        this.filter = filter;
         this.preprocessingTask = preprocessingTask;
+        this.postprocessingTask = postprocessingTask;
         this.callback = callback;
     }
 
@@ -86,10 +103,16 @@ public abstract class PublishingPoller<T> {
         for (T item : items) {
 
             try {
+                if (filter != null && !filter.test(item))
+                    continue;
+
                 if (preprocessingTask != null)
                     preprocessingTask.run(item);
 
                 queue.push(item);
+
+                if (postprocessingTask != null)
+                    postprocessingTask.run(item);
 
                 processed++;
 
