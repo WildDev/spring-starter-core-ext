@@ -12,6 +12,7 @@ For example, `futureCalculator.calc(LocalDateTime.now(), "20s")` is equal to `Lo
 * `ExpiredRecordsCollector` - an accumulative interface for expired data collection
 * `Queue`, `Slicer`, `Task` - interfaces to implement custom queues, slicers and tasks respectively
 * `PublishingPoller` - polling based abstraction to process large datasets
+* `DefaultDurationConverter` - bean to convert duration values to a different time unit. For example, `durationConverter.convert(new DurationValue(1200, TimeUnit.SECONDS), TimeUnit.MINUTES)` produces the converted value `DurationValue(value=20, timeUnit=MINUTES)`
 
 ### Get started
 
