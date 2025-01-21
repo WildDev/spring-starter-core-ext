@@ -1,5 +1,6 @@
-package fun.wilddev.spring.core.services.date;
+package fun.wilddev.spring.core.services.date.calculators;
 
+import fun.wilddev.spring.core.services.date.DurationReader;
 import java.time.LocalDateTime;
 
 import lombok.extern.slf4j.Slf4j;

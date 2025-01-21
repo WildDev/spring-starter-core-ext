@@ -1,5 +1,6 @@
-package fun.wilddev.spring.core.services.date;
+package fun.wilddev.spring.core.services.date.calculators;
 
+import fun.wilddev.spring.core.services.date.DurationValue;
 import java.time.LocalDateTime;
 
 import org.springframework.lang.NonNull;
