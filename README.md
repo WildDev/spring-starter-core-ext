@@ -31,11 +31,11 @@ Also available in Maven central:
 
 ### License
 
-This project is licensed under the Apache License 2.0.
+T*his project is licensed under the Apache License 2.0.*
 
 Dependencies:
 
 - Spring Boot (Apache 2.0)
 - Lombok (MIT)
 
-See LICENSE and NOTICE files for details.
+See [LICENSE](LICENSE) and [NOTICE](NOTICE) files for details.
